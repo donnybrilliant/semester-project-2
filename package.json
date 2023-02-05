@@ -1,0 +1,23 @@
+{
+  "name": "semester-project-2",
+  "version": "1.0.0",
+  "description": "Semester Project 2 at Noroff",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donnybrilliant/semester-project-2.git"
+  },
+  "author": "Daniel Vier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/donnybrilliant/semester-project-2/issues"
+  },
+  "homepage": "https://github.com/donnybrilliant/semester-project-2#readme",
+  "devDependencies": {
+    "sass": "^1.58.0"
+  }
+}
