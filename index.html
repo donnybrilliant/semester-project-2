@@ -27,13 +27,83 @@
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
-                    <button class="btn btn-outline-success" type="button">Login</button>
+                    <a href="#" data-bs-target="#loginModal" data-bs-toggle="modal" data-bs-dismiss="modal">Login</a>
                 </div>
             </div>
         </nav>
 
     </div>
 
+
+
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login or register a free account
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control rounded-3" id="loginEmail"
+                                placeholder="name@noroff.no" required pattern="^[\w\-.]+@(stud.)?noroff.no$"
+                                title="Must be a valid @stud.noroff.no or @noroff.no address.">
+                            <label for="loginEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password" class="form-control rounded-3" id="loginPassword"
+                                placeholder="Password" minlength="8" required title="Must be at least 8 characters.">
+                            <label for="loginPassword">Password</label>
+                        </div>
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Login</button>
+                        <small class="text-muted mt-2">Don't have an account? <a href="#"
+                                data-bs-target="#registerModal" data-bs-toggle="modal" data-bs-dismiss="modal">Click
+                                here to register</a>.</small>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel"><i class="bi bi-columns"></i> Register a free
+                        account
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="name" class="form-control rounded-3" id="registerName"
+                                placeholder="name@noroff.no" required maxlength="20" pattern="^[\w]+$"
+                                title="Username must only contain letters, numbers and underscore.">
+                            <label for="registerName">Username</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control rounded-3" id="registerEmail"
+                                placeholder="name@noroff.no" required pattern="^[\w\-.]+@(stud.)?noroff.no$"
+                                title="Must be a valid @stud.noroff.no or @noroff.no address.">
+                            <label for="registerEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password" class="form-control rounded-3" id="registerPassword"
+                                placeholder="Password" minlength="8" required title="Must be at least 8 characters.">
+                            <label for="registerPassword">Password</label>
+                        </div>
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>
+                        <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
