@@ -8,7 +8,7 @@
     <title>Auction</title>
     <link rel="stylesheet" href="./dist/css/styles.css">
     <script type="module" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js" defer></script>
-
+    <script src="./src/js/index.js" defer type="module"></script>
 
 
 </head>
@@ -18,7 +18,7 @@
     <div class="container-fluid vh-100">
         <nav class="navbar navbar-expand-sm">
             <div class="container-fluid">
-                <a href="#" class="navbar-brand">Auction</a>
+                <a href="../index.html" class="navbar-brand">openAuction</a>
                 <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                     data-bs-target="#primary-nav">
                     <span class="navbar-toggler-icon"></span>
@@ -28,18 +28,23 @@
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
+                    <button type="button" class="btn btn-success" data-bs-target="#newListingModal"
+                        data-bs-toggle="modal" data-bs-dismiss="modal" title="Add new listing">
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
                     <a href="#" data-bs-target="#loginModal" data-bs-toggle="modal" data-bs-dismiss="modal">Login</a>
                 </div>
             </div>
         </nav>
 
+
+
+        <main>
+            <div id="listingsContainer" class="row row-cols-1 row-cols-sm-3 align-items-stretch g-4 py-5">Loading...
+            </div>
+        </main>
+
     </div>
-
-    <main class="container-fluid">
-
-    </main>
-
-
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -51,21 +56,22 @@
                 <div class="modal-body">
                     <form id="loginForm">
                         <div class="form-floating mb-3">
-                            <input type="email" name="email" class="form-control rounded-3" id="loginEmail"
+                            <input type="email" name="email" class="form-control" id="loginEmail"
                                 placeholder="name@noroff.no" required pattern="^[\w\-.]+@(stud.)?noroff.no$"
                                 title="Must be a valid @stud.noroff.no or @noroff.no address.">
                             <label for="loginEmail">Email address</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" name="password" class="form-control rounded-3" id="loginPassword"
+                            <input type="password" name="password" class="form-control" id="loginPassword"
                                 placeholder="Password" minlength="8" required title="Must be at least 8 characters.">
                             <label for="loginPassword">Password</label>
                         </div>
-                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Login</button>
-                        <small class="text-muted mt-2">Don't have an account? <a href="#"
-                                data-bs-target="#registerModal" data-bs-toggle="modal" data-bs-dismiss="modal">Click
-                                here to register</a>.</small>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+                        <div class="text-muted my-2">Don't have an account? <a href="#" data-bs-target="#registerModal"
+                                data-bs-toggle="modal" data-bs-dismiss="modal">Click
+                                here to register</a>.</div>
                     </form>
+                    <div id="loginResponse"></div>
                 </div>
 
             </div>
@@ -83,30 +89,89 @@
                 <div class="modal-body">
                     <form id="registerForm">
                         <div class="form-floating mb-3">
-                            <input type="text" name="name" class="form-control rounded-3" id="registerName"
+                            <input type="text" name="name" class="form-control" id="registerName"
                                 placeholder="name@noroff.no" required maxlength="20" pattern="^[\w]+$"
                                 title="Username must only contain letters, numbers and underscore.">
                             <label for="registerName">Username</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" name="email" class="form-control rounded-3" id="registerEmail"
+                            <input type="email" name="email" class="form-control" id="registerEmail"
                                 placeholder="name@noroff.no" required pattern="^[\w\-.]+@(stud.)?noroff.no$"
                                 title="Must be a valid @stud.noroff.no or @noroff.no address.">
                             <label for="registerEmail">Email address</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" name="password" class="form-control rounded-3" id="registerPassword"
+                            <input type="password" name="password" class="form-control" id="registerPassword"
                                 placeholder="Password" minlength="8" required title="Must be at least 8 characters.">
                             <label for="registerPassword">Password</label>
                         </div>
-                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>
-                        <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+                        <div class="text-muted my-2">By clicking Sign up, you agree to the terms of use.</div>
                     </form>
+                    <div id="registerResponse"></div>
                 </div>
 
             </div>
         </div>
     </div>
+    <div class="modal fade" id="newListingModal" tabindex="-1" aria-labelledby="newListingModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="newListingModalLabel">Create new
+                        Listing
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newListingForm">
+                        <div class="mb-3">
+                            <input type="text" name="title" class="form-control" id="newListingTitle"
+                                placeholder="Title of what you're selling" required maxlength="280">
+
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" name="description" placeholder="Description"
+                                id="newListingTextArea" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="tags" class="form-control" id="newListingTags"
+                                placeholder="Tags, split with comma" title="Split tags with comma">
+
+                        </div>
+
+                        <div id="mediaContainer">
+                            <div class="input-group mb-3">
+                                <input type="url" name="media" class="form-control" id="newListingMedia"
+                                    placeholder="Add URL to Media" title="Must be a valid URL">
+
+                                <button type="button" id="addMedia" class="btn btn-success"><i
+                                        class="bi bi-plus-circle"></i></button>
+
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex justify-content-between">
+                            <input type="datetime-local" name="endsAt" class="form-control" required
+                                id="newListingDate">
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-secondary m-2"
+                                    data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary m-2">Publish</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="createResponse"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
 </body>
 
 </html>
