@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction</title>
+    <link rel="stylesheet" href="../dist/css/styles.css">
+    <script type="module" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js" defer></script>
+    <script src="../src/js/index.js" defer type="module"></script>
+
+
+</head>
+
+<body>
+
+    <div class="container-fluid vh-100">
+
+        <nav class="navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/index.html">
+                    Auction
+                </a>
+
+                <form class="d-flex" role="search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                </form>
+
+                <div class="dropdown">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end text-small">
+                        <li><a class="dropdown-item" href="#">My Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+
+        <!--         <nav class="navbar navbar-expand-sm">
+            <div class="container-fluid">
+                <a href="../index.html" class="navbar-brand">Auction</a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#primary-nav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="justify-content-between" id="primary-nav">
+                    <form class="d-flex" role="search">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+
+                    </form>
+                    <a href="#" data-bs-target="#loginModal" data-bs-toggle="modal" data-bs-dismiss="modal">Login</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="dropdown text-end">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small" style="">
+                <li><a class="dropdown-item" href="#">New project...</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+        </div>
+
+        <div class="flex-shrink-0 dropdown">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small shadow" style="">
+                <li><a class="dropdown-item" href="#">New project...</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+        </div> -->
+
+
+
+        <main class="profile">
+            <div class="row flex-grow-1">
+
+
+                <div id="profileInfo" class="row d-flex align-items-center mb-5 mt-2">
+
+                    <div id="avatarContainer" class="col-sm-5 g-5 text-center">
+                        <img id="avatar" src="../assets/images/avatar.svg" class="img-fluid mb-4 rounded-circle avatar"
+                            alt="Profile picture">
+                    </div>
+                    <div class="col-sm-7">
+                        <h5 class="mb-4">Full Name</h5>
+
+
+                        <p id="profileInfoEmail" class="blockquote-footer">
+                            name@email.com
+                        </p>
+
+                        <p id="profileInfoCredits" class="border-bottom">666 credits</p>
+                        <p id="profileInfoListings" class="border-bottom">666 listings</p>
+                        <p id="profileInfoBidsWins" class="border-bottom">666 bids / 666 wins</p>
+
+
+                    </div>
+                </div>
+
+
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <details id="profileListings">
+                            <summary>No listings..</summary>
+                            <ul class="list-group list-group-flush my-3">
+
+                            </ul>
+                        </details>
+                    </li>
+                    <li class="list-group-item">
+                        <details id="profileBids">
+                            <summary>No bids..</summary>
+                            <ul class="list-group list-group-flush my-3 row">
+
+                            </ul>
+                        </details>
+                    </li>
+                    <li class="list-group-item">
+                        <details id="profileWins">
+                            <summary>No wins..</summary>
+                            <ul class="list-group list-group-flush my-3">
+
+                            </ul>
+                        </details>
+                    </li>
+                </ul>
+
+
+
+            </div>
+
+        </main>
+
+
+
+
+    </div>
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login or register a free account
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control rounded-3" id="loginEmail"
+                                placeholder="name@noroff.no" required pattern="^[\w\-.]+@(stud.)?noroff.no$"
+                                title="Must be a valid @stud.noroff.no or @noroff.no address.">
+                            <label for="loginEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password" class="form-control rounded-3" id="loginPassword"
+                                placeholder="Password" minlength="8" required title="Must be at least 8 characters.">
+                            <label for="loginPassword">Password</label>
+                        </div>
+                        <button class="w-100 btn btn-lg rounded-3 btn-primary" type="submit">Login</button>
+                        <div class="text-muted my-2">Don't have an account? <a href="#" data-bs-target="#registerModal"
+                                data-bs-toggle="modal" data-bs-dismiss="modal">Click
+                                here to register</a>.</div>
+                    </form>
+                    <div id="loginResponse"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel"><i class="bi bi-columns"></i> Register a free
+                        account
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="name" class="form-control rounded-3" id="registerName"
+                                placeholder="name@noroff.no" required maxlength="20" pattern="^[\w]+$"
+                                title="Username must only contain letters, numbers and underscore.">
+                            <label for="registerName">Username</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control rounded-3" id="registerEmail"
+                                placeholder="name@noroff.no" required pattern="^[\w\-.]+@(stud.)?noroff.no$"
+                                title="Must be a valid @stud.noroff.no or @noroff.no address.">
+                            <label for="registerEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password" class="form-control rounded-3" id="registerPassword"
+                                placeholder="Password" minlength="8" required title="Must be at least 8 characters.">
+                            <label for="registerPassword">Password</label>
+                        </div>
+                        <button class="w-100 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>
+                        <div class="text-muted my-2">By clicking Sign up, you agree to the terms of use.</div>
+                    </form>
+                    <div id="registerResponse"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
