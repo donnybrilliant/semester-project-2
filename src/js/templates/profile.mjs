@@ -1,7 +1,16 @@
+import { load } from "../storage/index.mjs";
 import { dateCountdown } from "../utils/date.mjs";
 
 export function profileInfoTemplate(data) {
   const container = document.querySelector("#profileInfo");
+  const user = load("user").name;
+  if (user === data.name) {
+    const editButton = `<button type="button" class="btn btn-outline-secondary mb-3" data-bs-toggle="modal"
+    data-bs-target="#updateProfileModal">
+    <i class="bi bi-pencil-square"></i> Edit profile</button>`;
+    container.querySelector("#avatarContainer").innerHTML += editButton;
+  }
+
   container.querySelector("h5").innerText = data.name;
   container.querySelector("#profileInfoEmail").innerText = data.email;
   if (data.avatar) {
