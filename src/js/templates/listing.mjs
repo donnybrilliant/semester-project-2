@@ -7,7 +7,9 @@ export function listingTemplate(data) {
   const container = document.createElement("div");
   container.innerHTML = `
   <small id="dates" class="float-end"></small>
+  <div id="carousel" class="carousel slide" data-bs-ride="true">
   <img class="img-fluid rounded">
+  </div>
   <div class="d-flex justify-content-between align-items-center border-bottom my-2">
   <h1></h1>
   <div id="endsAt" class="d-flex lead"></div>
@@ -57,14 +59,42 @@ export function listingTemplate(data) {
 
   // Image - own function of course. but better way to do this?
   // need to make image gallery if array bigger than 1
-  let image = "";
-  if (data.media.length >= 1) {
-    image = data.media[0];
+
+  if (data.media.length > 1) {
+    const carousel = container.querySelector("#carousel");
+    carousel.innerHTML = `<div class="carousel-inner">
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>`;
+    const carouselInner = carousel.querySelector(".carousel-inner");
+    data.media.forEach((element, index) => {
+      const carouselContainer = document.createElement("div");
+      carouselContainer.classList.add("carousel-item");
+      const carouselImage = document.createElement("img");
+      carouselImage.classList.add("d-block", "w-100", "rounded");
+      carouselImage.src = element;
+      carouselImage.alt = data.title;
+      if (index === 0) {
+        carouselContainer.classList.add("active");
+      }
+      carouselContainer.append(carouselImage);
+      carouselInner.append(carouselContainer);
+    });
+  } else if (data.media.length === 1) {
+    container.querySelector("#carousel>img").src = data.media[0];
+    container.querySelector("#carousel>img").alt = data.title;
   } else {
-    image = "/assets/images/placeholder.jpeg";
+    container.querySelector("#carousel>img").src =
+      "/assets/images/placeholder.jpeg";
+    container.querySelector("#carousel>img").alt = data.title;
   }
-  container.querySelector("img").src = image;
-  container.querySelector("img").alt = data.title;
+
   container.querySelector("h1").innerText = data.title;
   container.querySelector("#description").innerText = data.description;
 
