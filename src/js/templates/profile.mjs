@@ -1,5 +1,5 @@
 import { load } from "../storage/index.mjs";
-import { dateCountdown } from "../utils/date.mjs";
+import { dateConverter, dateCountdown } from "../utils/date.mjs";
 
 export function profileInfoTemplate(data) {
   const container = document.querySelector("#profileInfo");
@@ -62,6 +62,8 @@ export function profileListingsTemplate(data) {
   <div class="col-3 d-flex"></div>
   `;
 
+  // some other way to differentiate between bids, wins and listings?
+
   if (data.listing) {
     listElement.href = "/listing/?id=" + data.listing.id;
     listElement.querySelector("img").src = data.listing.media[0];
@@ -71,6 +73,22 @@ export function profileListingsTemplate(data) {
       '<i class="bi bi-coin ms-1"></i>';
     listElement.querySelectorAll("div")[2].innerText = dateCountdown(
       data.listing.endsAt
+    );
+  } else if (data.win === true) {
+    listElement.href = "/listing/?id=" + data.id;
+    if (data.media && data.media.length > 0) {
+      listElement.querySelector("img").src = data.media[0];
+    } else {
+      listElement.querySelector("img").src = "/assets/images/placeholder.jpeg";
+    }
+
+    listElement.querySelector("span").innerText = data.title;
+    listElement.querySelectorAll("div")[1].innerText =
+      data.bids[data.bids.length - 1].amount;
+    listElement.querySelectorAll("div")[1].innerHTML +=
+      '<i class="bi bi-coin ms-1"></i>';
+    listElement.querySelectorAll("div")[2].innerText = dateConverter(
+      data.endsAt
     );
   } else {
     listElement.href = "/listing/?id=" + data.id;
@@ -88,13 +106,13 @@ export function profileListingsTemplate(data) {
 }
 
 export function renderProfileListingsTemplate(dataList, parent) {
-  if (dataList[0].bidderName) {
+  /*   if (dataList[0].bidderName) {
     if (dataList.length === 1) {
       document.querySelector("span.bids").innerText = dataList.length + " win";
     } else {
       document.querySelector("span.bids").innerText = dataList.length + " wins";
     }
-  }
+  } */
   const container = parent.querySelector("ul");
   // set this in another function? where i await the readListings call?
   // if data.amount or data.listing exist - this is a bid! else it is a listing. But what about wins?
@@ -102,6 +120,10 @@ export function renderProfileListingsTemplate(dataList, parent) {
     parent.querySelector("summary").innerText = dataList.length + " bid";
   } else if (dataList[0].bidderName && dataList.length > 1) {
     parent.querySelector("summary").innerText = dataList.length + " bids";
+  } else if (dataList[0].win === true && dataList.length === 1) {
+    parent.querySelector("summary").innerText = dataList.length + " win";
+  } else if (dataList[0].win === true && dataList.length > 1) {
+    parent.querySelector("summary").innerText = dataList.length + " wins";
   } else if (dataList[0].title && dataList.length === 1) {
     parent.querySelector("summary").innerText = dataList.length + " listing";
   } else if (dataList[0].title && dataList.length > 1) {
