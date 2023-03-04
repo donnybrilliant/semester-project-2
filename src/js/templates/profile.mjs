@@ -29,12 +29,13 @@ export function profileInfoTemplate(data) {
       data.listings.length + " listings";
   }
 
+  const profileBidsWins = container.querySelector("#profileInfoBidsWins");
   //make function for this type of plural thing, same with listings above
   if (data.wins.length === 1) {
-    container.querySelector("#profileInfoBidsWins").innerText =
+    profileBidsWins.querySelector("span.wins").innerText =
       data.wins.length + " win";
   } else {
-    container.querySelector("#profileInfoBidsWins").innerText =
+    profileBidsWins.querySelector("span.wins").innerText =
       data.wins.length + " wins";
   }
 }
@@ -53,12 +54,12 @@ export function profileListingsTemplate(data) {
     "list-group-item-action"
   );
   listElement.innerHTML = `
-  <div class="col-8">
+  <div class="col-7">
   <img class="rounded-circle me-2" width="32px" height="32px">
   <span>hello</span>
   </div>
   <div class="col-2"></div>
-  <div class="col-2 d-flex"></div>
+  <div class="col-3 d-flex"></div>
   `;
 
   if (data.listing) {
@@ -87,6 +88,13 @@ export function profileListingsTemplate(data) {
 }
 
 export function renderProfileListingsTemplate(dataList, parent) {
+  if (dataList[0].bidderName) {
+    if (dataList.length === 1) {
+      document.querySelector("span.bids").innerText = dataList.length + " win";
+    } else {
+      document.querySelector("span.bids").innerText = dataList.length + " wins";
+    }
+  }
   const container = parent.querySelector("ul");
   // set this in another function? where i await the readListings call?
   // if data.amount or data.listing exist - this is a bid! else it is a listing. But what about wins?
@@ -99,6 +107,7 @@ export function renderProfileListingsTemplate(dataList, parent) {
   } else if (dataList[0].title && dataList.length > 1) {
     parent.querySelector("summary").innerText = dataList.length + " listings";
   }
+
   dataList.forEach((element) => {
     const listing = profileListingsTemplate(element);
     container.appendChild(listing);
