@@ -25,7 +25,7 @@ export function dateCountdown(data) {
 
 export function dateConverter(date) {
   const newDate = new Date(date);
-  return newDate.toLocaleString();
+  return newDate.toLocaleString().slice(0, 15);
 }
 
 export function datetimeLocal(datetime) {
