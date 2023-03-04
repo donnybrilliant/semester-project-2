@@ -12,20 +12,25 @@ export function profileInfoTemplate(data) {
   }
 
   container.querySelector("h5").innerText = data.name;
-  container.querySelector("#profileInfoEmail").innerText = data.email;
+  container.querySelector("#profileInfoEmail>a").innerText = data.email;
+  container.querySelector("#profileInfoEmail>a").href = "mailto:" + data.email;
   if (data.avatar) {
     container.querySelector("#avatar").src = data.avatar;
   }
-  container.querySelector("#profileInfoCredits").innerText =
-    data.credits + " credits";
+  container.querySelector("#profileInfoCredits").innerText = data.credits;
+  container.querySelector("#profileInfoCredits").innerHTML +=
+    '<i class="bi bi-coin ms-1"></i>';
 
-  container.querySelector("#profileInfoListings").innerText =
-    data.listings.length + " listings";
+  if (data.listings.length === 1) {
+    container.querySelector("#profileInfoListings").innerText =
+      data.listings.length + " listing";
+  } else {
+    container.querySelector("#profileInfoListings").innerText =
+      data.listings.length + " listings";
+  }
 
   //make function for this type of plural thing, same with listings above
-  if (!data.wins.length) {
-    container.querySelector("#profileInfoBidsWins").innerText = "0 wins";
-  } else if (data.wins.length === 1) {
+  if (data.wins.length === 1) {
     container.querySelector("#profileInfoBidsWins").innerText =
       data.wins.length + " win";
   } else {
@@ -85,9 +90,13 @@ export function renderProfileListingsTemplate(dataList, parent) {
   const container = parent.querySelector("ul");
   // set this in another function? where i await the readListings call?
   // if data.amount or data.listing exist - this is a bid! else it is a listing. But what about wins?
-  if (dataList[0].bidderName) {
+  if (dataList[0].bidderName && dataList.length === 1) {
+    parent.querySelector("summary").innerText = dataList.length + " bid";
+  } else if (dataList[0].bidderName && dataList.length > 1) {
     parent.querySelector("summary").innerText = dataList.length + " bids";
-  } else if (dataList[0].title) {
+  } else if (dataList[0].title && dataList.length === 1) {
+    parent.querySelector("summary").innerText = dataList.length + " listing";
+  } else if (dataList[0].title && dataList.length > 1) {
     parent.querySelector("summary").innerText = dataList.length + " listings";
   }
   dataList.forEach((element) => {
