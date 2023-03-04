@@ -27,7 +27,7 @@ export function listingTemplate(data) {
   </div>
   <form id="placeBidForm">
   <div class="input-group my-4">
-  <input id="placeBidAmount" name="amount" type="number" class="form-control" placeholder="Bid Amount">
+  <input id="placeBidAmount" name="amount" type="number" class="form-control" placeholder="Bid Amount" required>
   <span class="input-group-text"><i class="bi bi-coin"></i></span>
   <button class="btn btn-primary" type="submit">Bid</button>
 </div>
@@ -128,17 +128,27 @@ export function listingTemplate(data) {
 
   // Bids
   if (data.bids.length) {
-    const bids = document.createElement("details");
-    bids.classList.add("my-3");
-    bids.innerHTML = `<summary></summary>`;
-    if (data.bids.length === 1) {
-      bids.querySelector("summary").innerText = data.bids.length + " bid";
-    } else {
-      bids.querySelector("summary").innerText = data.bids.length + " bids";
-    }
-    const bidList = document.createElement("ul");
-    bidList.classList.add("list-group", "mt-3");
+    const bidContainer = document.createElement("ul");
+    bidContainer.classList.add("list-group");
+    bidContainer.innerHTML = `
+    <li class="list-group-item">
+    <details id="bids">
+        <summary>No bids..</summary>
+        <ul class="list-group list-group-flush my-3">
 
+        </ul>
+    </details>
+</li>
+    `;
+    if (data.bids.length === 1) {
+      bidContainer.querySelector("summary").innerText =
+        data.bids.length + " bid";
+    } else {
+      bidContainer.querySelector("summary").innerText =
+        data.bids.length + " bids";
+    }
+
+    const bidList = bidContainer.querySelector("ul");
     data.bids.forEach((element) => {
       const bid = document.createElement("li");
       bid.classList.add(
@@ -148,13 +158,13 @@ export function listingTemplate(data) {
         "align-items-center"
       );
       bid.innerHTML = `
-        <div id="bidder" class="col-7">
+        <div id="bidder" class="col-6">
           <img>
           <span id="bidderName"><a></a>
           </span>
         </div>
         <div class="col-2" id="bidAmount"></div>
-        <div class="col-3" id="bidDate"></div>
+        <div class="col-4" id="bidDate"></div>
       `;
       // bid.querySelector("#bidder>img").src = element.bidder.avatar; // should be another fetch to the seller?
       bid.querySelector("#bidderName>a").innerText = element.bidderName;
@@ -166,8 +176,8 @@ export function listingTemplate(data) {
       bid.querySelector("#bidDate").innerText = dateConverter(element.created);
       bidList.append(bid);
     });
-    bids.append(bidList);
-    container.append(bids);
+
+    container.append(bidContainer);
   } else {
     const bids = document.createElement("h6");
     bids.innerText = "No bids yet";
