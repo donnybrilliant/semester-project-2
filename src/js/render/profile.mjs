@@ -3,6 +3,7 @@ import {
   renderProfileInfoTemplate,
   renderProfileListingsTemplate,
 } from "../templates/profile.mjs";
+import { read as readListing } from "../api/listings/read.mjs";
 
 export async function profile() {
   //if url is /profiles/
@@ -30,14 +31,25 @@ export async function profile() {
   const profileBidsContainer = document.querySelector("#profileBids");
   renderProfileListingsTemplate(profileBids, profileBidsContainer);
 
-  /*   const profileWins = profileInfo.wins;
+  const profileWins = profileInfo.wins;
   console.log(profileWins);
+
+  // find win amount
+  // loop through profileWins and get the listing data for each win and return a new array with the listing data
+  const profileWinsWithListingData = [];
+  for (let i = 0; i < profileWins.length; i++) {
+    const listing = await readListing(profileWins[i]);
+    listing.win = true;
+    if (listing.errors) {
+      continue;
+    }
+    profileWinsWithListingData.push(listing);
+  }
+  console.log(profileWinsWithListingData);
+
   const profileWinsContainer = document.querySelector("#profileWins");
-  renderProfileListingsTemplate(profileWins, profileWinsContainer); */
-
-  //readBids
-
-  /*   const profilePosts = await readListings(userName);
-  const postsContainer = document.querySelector("#profileListings");
-  renderPostTemplates(profilePosts, postsContainer); */
+  renderProfileListingsTemplate(
+    profileWinsWithListingData,
+    profileWinsContainer
+  );
 }
