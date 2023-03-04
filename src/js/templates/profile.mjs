@@ -87,8 +87,13 @@ export function profileListingsTemplate(data) {
       data.bids[data.bids.length - 1].amount;
     listElement.querySelectorAll("div")[1].innerHTML +=
       '<i class="bi bi-coin ms-1"></i>';
-    listElement.querySelectorAll("div")[2].innerText = dateConverter(
+    /*     listElement.querySelectorAll("div")[2].innerText = dateConverter(
       data.endsAt
+    ); */
+    // convert data.endsAt into a date object, then convert it to a string dd.mm.yyyy hh:mm
+    listElement.querySelectorAll("div")[2].innerText = dateConverter(
+      data.endsAt,
+      true
     );
   } else {
     listElement.href = "/listing/?id=" + data.id;
@@ -106,13 +111,13 @@ export function profileListingsTemplate(data) {
 }
 
 export function renderProfileListingsTemplate(dataList, parent) {
-  /*   if (dataList[0].bidderName) {
+  if (dataList[0].bidderName) {
     if (dataList.length === 1) {
-      document.querySelector("span.bids").innerText = dataList.length + " win";
+      document.querySelector("span.bids").innerText = dataList.length + " bid";
     } else {
-      document.querySelector("span.bids").innerText = dataList.length + " wins";
+      document.querySelector("span.bids").innerText = dataList.length + " bids";
     }
-  } */
+  }
   const container = parent.querySelector("ul");
   // set this in another function? where i await the readListings call?
   // if data.amount or data.listing exist - this is a bid! else it is a listing. But what about wins?
