@@ -30,3 +30,13 @@ export async function read(id) {
   }
   return response.json();
 }
+
+export async function readTag(tag) {
+  const readTagURL = `${URL}/listings?_tag=${tag}&_seller=true&_bids=true`;
+
+  const response = await authFetch(readTagURL);
+  if (!response.ok) {
+    console.log(response); // render something here . responseHandler
+  }
+  return response.json();
+}
