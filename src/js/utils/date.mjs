@@ -23,9 +23,13 @@ export function dateCountdown(data) {
   return dateToRender;
 }
 
-export function dateConverter(date) {
+// need a work around. day and month need to be consistent 2-digits!
+export function dateConverter(date, time) {
   const newDate = new Date(date);
-  return newDate.toLocaleString().slice(0, 15);
+  if (time) {
+    return newDate.toLocaleString("en-GB").slice(0, 10);
+  }
+  return newDate.toLocaleString("en-GB").slice(0, 17);
 }
 
 export function datetimeLocal(datetime) {
