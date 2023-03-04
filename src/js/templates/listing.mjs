@@ -35,6 +35,16 @@ export function listingTemplate(data) {
   `;
   //rename shit and make own function
   const form = container.querySelector("#placeBidForm");
+  const placeBidAmount = form.querySelector("#placeBidAmount");
+  if (data.bids.length) {
+    const highestBid = data.bids[data.bids.length - 1].amount;
+    placeBidAmount.setAttribute("min", highestBid + 1);
+    placeBidAmount.setAttribute(
+      "placeholder",
+      `Minimum Bid: ${highestBid + 1}`
+    );
+  }
+  //console.log();
   if (form) {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -179,9 +189,15 @@ export function listingTemplate(data) {
 
     container.append(bidContainer);
   } else {
-    const bids = document.createElement("h6");
-    bids.innerText = "No bids yet";
-    bids.classList.add("my-3");
+    const bids = document.createElement("ul");
+    bids.classList.add("list-group");
+    bids.innerHTML = `
+    <li class="list-group-item">
+    <details id="bids">
+        <summary>No bids yet..</summary>
+    </details>
+</li>
+    `;
     container.append(bids);
   }
 
