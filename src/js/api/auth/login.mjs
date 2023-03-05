@@ -1,5 +1,4 @@
 import { URL } from "../constants.mjs";
-import * as storage from "../../storage/index.mjs";
 
 //make one function for login and register as they share many similarities.
 export async function login(user) {
