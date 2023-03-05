@@ -2,6 +2,9 @@ import { URL } from "../constants.mjs";
 import { authFetch } from "../authFetch.mjs";
 
 export async function create(data) {
+  if (!data) {
+    throw new Error("Delete requires a data object");
+  }
   const createListingURL = URL + "/listings";
   const method = "post";
 

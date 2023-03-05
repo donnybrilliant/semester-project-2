@@ -9,34 +9,58 @@ export async function readAll(
   active = "true"
 ) {
   const readListingsURL = `${URL}/listings?_seller=true&_bids=true&sort=${sort}&sortOrder=${order}&offset=${offset}&limit=${limit}&_active=${active}`;
-
   const response = await authFetch(readListingsURL);
-  if (!response.ok) {
-    console.log(response); // render something here . responseHandler
+  const result = await response.json();
+
+  if (response.ok) {
+    return result;
   }
-  return response.json();
+
+  if (!response.ok) {
+    const error = result.errors[0].message
+      ? result.errors[0].message
+      : "Could not place bid.";
+    throw new Error(error);
+  }
 }
 
 export async function read(id) {
   if (!id) {
-    throw new Error("Requires a listing ID"); // render something here?
+    throw new Error("Requires a listing ID");
   }
 
   const readListingURL = URL + "/listings/" + id + "?_seller=true&_bids=true";
-
   const response = await authFetch(readListingURL);
-  if (!response.ok) {
-    console.log(response);
+  const result = await response.json();
+
+  if (response.ok) {
+    return result;
   }
-  return response.json();
+
+  if (!response.ok) {
+    const error = result.errors[0].message
+      ? result.errors[0].message
+      : "Could not place bid.";
+    throw new Error(error);
+  }
 }
 
 export async function readTag(tag) {
-  const readTagURL = `${URL}/listings?_tag=${tag}&_seller=true&_bids=true`;
-
-  const response = await authFetch(readTagURL);
-  if (!response.ok) {
-    console.log(response); // render something here . responseHandler
+  if (!tag) {
+    throw new Error("Requires a tag");
   }
-  return response.json();
+  const readTagURL = `${URL}/listings?_tag=${tag}&_seller=true&_bids=true`;
+  const response = await authFetch(readTagURL);
+  const result = await response.json();
+
+  if (response.ok) {
+    return result;
+  }
+
+  if (!response.ok) {
+    const error = result.errors[0].message
+      ? result.errors[0].message
+      : "Could not place bid.";
+    throw new Error(error);
+  }
 }

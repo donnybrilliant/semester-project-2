@@ -14,5 +14,16 @@ export async function update(data) {
     body: JSON.stringify(data),
   });
 
-  return response.json();
+  const result = await response.json();
+
+  if (response.ok) {
+    return result;
+  }
+
+  if (!response.ok) {
+    const error = result.errors[0].message
+      ? result.errors[0].message
+      : "There was an error updating the listing.";
+    throw new Error(error);
+  }
 }
