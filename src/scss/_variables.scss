@@ -1,0 +1,20 @@
+.avatar {
+    aspect-ratio: 1 / 1!important;
+  }
+
+  @media screen and (max-width: 480px) {
+    a.navbar-brand {
+      font-size: 0.9rem;
+    } 
+  }
+
+  $grid-breakpoints: (
+  xs: 0,
+  sm: 450px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+

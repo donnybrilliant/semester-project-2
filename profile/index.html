@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction</title>
+    <link rel="stylesheet" href="../dist/css/styles.css">
+    <script type="module" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js" defer></script>
+    <script src="../src/js/index.js" defer type="module"></script>
+
+
+</head>
+
+<body>
+
+    <div class="container-fluid vh-100">
+
+        <nav class="navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/index.html">openAuction</a>
+                <form class="d-none d-sm-block flex-fill me-3" role="search">
+                    <input class="form-control form-control-sm" type="search" placeholder="Search" aria-label="Search">
+                </form>
+                <div id="navControls">
+                    <a href="#" data-bs-target="#loginModal" data-bs-toggle="modal" data-bs-dismiss="modal">Login</a>
+                </div>
+
+                <div class="navbar-collapse collapse" id="navigation">
+                    <ul class="navbar-nav">
+                        <li id="userInfo" class="nav-item my-4 d-flex justify-content-end">
+                            <span id="userNameMenu" class="me-4"><a class="text-decoration-none">-</a></span><span
+                                id="creditsMenu">-</span><i class="bi bi-coin ms-1"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="profileLink" class="nav-link" href="#">My Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="logOutButton" class="nav-link" href="#">Log Out</a>
+                        </li>
+
+                    </ul>
+                    <form class="mt-4 d-block d-sm-none" role="search">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+
+
+        <main class="profile">
+            <div class="flex-grow-1 m-3 pb-5">
+
+
+                <div id="profileInfo" class="row d-flex align-items-center m-3">
+
+                    <div id="avatarContainer" class="col-sm-5 g-5 text-center">
+                        <img id="avatar" src="../assets/images/avatar.svg" class="img-fluid mb-4 rounded-circle avatar"
+                            alt="Profile picture">
+                    </div>
+                    <div class="col-sm-7">
+                        <h5 class="mb-4">User Name</h5>
+
+
+                        <p id="profileInfoEmail" class="blockquote-footer"><a href="mailto:"
+                                class="text-decoration-none">name@email.com</a>
+                        </p>
+
+                        <p id="profileInfoCredits" class="border-bottom">666<i class="bi bi-coin ms-1"></i></p>
+                        <p id="profileInfoListings" class="border-bottom">No Listings</p>
+                        <p id="profileInfoBidsWins" class="border-bottom"><span class="bids">No Bids</span> / <span
+                                class="wins">No Wins</span>
+                        </p>
+
+
+                    </div>
+                </div>
+
+
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <details id="profileListings">
+                            <summary>No listings..</summary>
+                            <ul class="list-group list-group-flush my-3">
+
+                            </ul>
+                        </details>
+                    </li>
+                    <li class="list-group-item">
+                        <details id="profileBids">
+                            <summary>No bids..</summary>
+                            <ul class="list-group list-group-flush my-3">
+
+                            </ul>
+                        </details>
+                    </li>
+                    <li class="list-group-item">
+                        <details id="profileWins">
+                            <summary>No wins..</summary>
+                            <ul class="list-group list-group-flush my-3">
+
+                            </ul>
+                        </details>
+                    </li>
+                </ul>
+
+
+
+            </div>
+
+        </main>
+
+
+
+
+    </div>
+
+
+    <div class="modal fade" id="updateProfileModal" tabindex="-1" aria-labelledby="updateProfileModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="updateProfileModalLabel"><i class="bi bi-columns"></i> Update
+                        profile avatar
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateProfileForm">
+
+                        <div class="form-floating mb-3">
+                            <input type="text" name="name" value="Username" class="form-control rounded-3"
+                                id="updateProfileUsername" disabled readonly>
+                            <label for="updateProfileUsername">Username</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="email" value="Email" class="form-control rounded-3"
+                                id="updateProfileEmail" disabled readonly>
+                            <label for="updateProfileEmail">Email</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="url" name="avatar" class="form-control rounded-3" id="updateProfileAvatar"
+                                title="Must be a valid URL">
+                            <label for="updateProfileAvatar">Avatar</label>
+                        </div>
+
+
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary m-2">Submit</button>
+                        </div>
+                    </form>
+                    <div id="updateProfileResponse"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login or register a free account
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control rounded-3" id="loginEmail"
+                                placeholder="name@noroff.no" required pattern="^[\w\-.]+@(stud.)?noroff.no$"
+                                title="Must be a valid @stud.noroff.no or @noroff.no address.">
+                            <label for="loginEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password" class="form-control rounded-3" id="loginPassword"
+                                placeholder="Password" minlength="8" required title="Must be at least 8 characters.">
+                            <label for="loginPassword">Password</label>
+                        </div>
+                        <button class="w-100 btn btn-lg rounded-3 btn-primary" type="submit">Login</button>
+                        <div class="text-muted my-2">Don't have an account? <a href="#" data-bs-target="#registerModal"
+                                data-bs-toggle="modal" data-bs-dismiss="modal">Click
+                                here to register</a>.</div>
+                    </form>
+                    <div id="loginResponse"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel"><i class="bi bi-columns"></i> Register a free
+                        account
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="name" class="form-control rounded-3" id="registerName"
+                                placeholder="name@noroff.no" required maxlength="20" pattern="^[\w]+$"
+                                title="Username must only contain letters, numbers and underscore.">
+                            <label for="registerName">Username</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control rounded-3" id="registerEmail"
+                                placeholder="name@noroff.no" required pattern="^[\w\-.]+@(stud.)?noroff.no$"
+                                title="Must be a valid @stud.noroff.no or @noroff.no address.">
+                            <label for="registerEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password" class="form-control rounded-3" id="registerPassword"
+                                placeholder="Password" minlength="8" required title="Must be at least 8 characters.">
+                            <label for="registerPassword">Password</label>
+                        </div>
+                        <button class="w-100 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>
+                        <div class="text-muted my-2">By clicking Sign up, you agree to the terms of use.</div>
+                    </form>
+                    <div id="registerResponse"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

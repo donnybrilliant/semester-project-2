@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction</title>
+    <link rel="stylesheet" href="./dist/css/styles.css">
+    <script type="module" src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js" defer></script>
+    <script src="./src/js/index.js" defer type="module"></script>
+
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+
+        <nav class="navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/index.html">openAuction</a>
+                <form class="d-none d-sm-block flex-fill me-3" role="search">
+                    <input class="form-control form-control-sm" type="search" placeholder="Search" aria-label="Search">
+                </form>
+                <div id="navControls">
+                    <a href="#" data-bs-target="#loginModal" data-bs-toggle="modal" data-bs-dismiss="modal">Login</a>
+                </div>
+
+                <div class="navbar-collapse collapse" id="navigation">
+                    <ul class="navbar-nav">
+                        <li id="userInfo" class="nav-item my-4 d-flex justify-content-end">
+                            <span id="userNameMenu" class="me-4"><a class="text-decoration-none">-</a></span><span
+                                id="creditsMenu">-</span><i class="bi bi-coin ms-1"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="profileLink" class="nav-link" href="#">My Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="logOutButton" class="nav-link" href="#">Log Out</a>
+                        </li>
+
+                    </ul>
+                    <form class="mt-4 d-block d-sm-none" role="search">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+
+        <main>
+            <div id="listingsContainer" class="row row-cols-1 row-cols-sm-3 align-items-stretch g-4 py-5">Loading...
+            </div>
+        </main>
+
+    </div>
+
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login or register a free account
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control" id="loginEmail"
+                                placeholder="name@noroff.no" required pattern="^[\w\-.]+@(stud.)?noroff.no$"
+                                title="Must be a valid @stud.noroff.no or @noroff.no address.">
+                            <label for="loginEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password" class="form-control" id="loginPassword"
+                                placeholder="Password" minlength="8" required title="Must be at least 8 characters.">
+                            <label for="loginPassword">Password</label>
+                        </div>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+                        <div class="text-muted my-2">Don't have an account? <a href="#" data-bs-target="#registerModal"
+                                data-bs-toggle="modal" data-bs-dismiss="modal">Click
+                                here to register</a>.</div>
+                    </form>
+                    <div id="loginResponse"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel"><i class="bi bi-columns"></i> Register a free
+                        account
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="name" class="form-control" id="registerName"
+                                placeholder="name@noroff.no" required maxlength="20" pattern="^[\w]+$"
+                                title="Username must only contain letters, numbers and underscore.">
+                            <label for="registerName">Username</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control" id="registerEmail"
+                                placeholder="name@noroff.no" required pattern="^[\w\-.]+@(stud.)?noroff.no$"
+                                title="Must be a valid @stud.noroff.no or @noroff.no address.">
+                            <label for="registerEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password" class="form-control" id="registerPassword"
+                                placeholder="Password" minlength="8" required title="Must be at least 8 characters.">
+                            <label for="registerPassword">Password</label>
+                        </div>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+                        <div class="text-muted my-2">By clicking Sign up, you agree to the terms of use.</div>
+                    </form>
+                    <div id="registerResponse"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="newListingModal" tabindex="-1" aria-labelledby="newListingModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="newListingModalLabel">Create new
+                        Listing
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newListingForm">
+                        <div class="mb-3">
+                            <input type="text" name="title" class="form-control" id="newListingTitle"
+                                placeholder="Title of what you're selling" required maxlength="280">
+
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" name="description" placeholder="Description"
+                                id="newListingTextArea" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="tags" class="form-control" id="newListingTags"
+                                placeholder="Tags, split with comma" title="Split tags with comma">
+
+                        </div>
+
+                        <div id="mediaContainer">
+                            <div class="input-group mb-3">
+                                <input type="url" name="media" class="form-control" id="newListingMedia"
+                                    placeholder="Add URL to Media" title="Must be a valid URL">
+
+                                <button type="button" id="addMedia" class="btn btn-success"><i
+                                        class="bi bi-plus-circle"></i></button>
+
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex justify-content-between">
+                            <input type="datetime-local" name="endsAt" class="form-control" required
+                                id="newListingDate">
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-secondary m-2"
+                                    data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary m-2">Publish</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="createResponse"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
