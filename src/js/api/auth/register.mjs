@@ -1,4 +1,3 @@
-import { renderResponseMessage } from "../../templates/response.mjs";
 import { URL } from "../constants.mjs";
 
 export async function register(user) {
@@ -17,13 +16,14 @@ export async function register(user) {
 
   const result = await response.json();
 
-  const container = document.querySelector("#registerResponse");
-
-  if (!response.ok) {
-    const error = result.errors[0].message;
-    return renderResponseMessage(error, container, "danger");
+  if (response.ok) {
+    return result;
   }
 
-  renderResponseMessage("You are now registered.", container, "success");
-  // to login modal or auto-login?
+  if (!response.ok) {
+    const error = result.errors[0].message
+      ? result.errors[0].message
+      : "There was an error registering.";
+    throw new Error(error);
+  }
 }
