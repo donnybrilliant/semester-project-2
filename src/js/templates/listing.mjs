@@ -1,6 +1,7 @@
 import { dateConverter, dateCountdown } from "../utils/date.mjs";
 import { load } from "../storage/index.mjs";
 import { bid } from "../api/listings/bid.mjs";
+import { loggedIn } from "../utils/loggedIn.mjs";
 
 export function listingTemplate(data) {
   console.log(data);
@@ -44,7 +45,12 @@ export function listingTemplate(data) {
       `Minimum Bid: ${highestBid + 1}`
     );
   }
-  //console.log();
+  if (!loggedIn()) {
+    placeBidAmount.setAttribute("disabled", true);
+    placeBidAmount.placeholder = "You must log in to bid";
+    form.querySelector("button").setAttribute("disabled", true);
+  }
+
   if (form) {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -59,12 +65,15 @@ export function listingTemplate(data) {
   // disable bid if not logged in
 
   // Author
-  const user = load("user").name;
-  if (user === data.seller.name) {
-    const edit = container.querySelector("#edit");
-    edit.innerHTML = `<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+  if (loggedIn()) {
+    const user = load("user").name;
+    if (user === data.seller.name) {
+      const edit = container.querySelector("#edit");
+      edit.innerHTML = `<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
     data-bs-target="#updateListingModal">
     <i class="bi bi-pencil-square"></i></button>`;
+      // run listener here?
+    }
   }
 
   // Image - own function of course. but better way to do this?
@@ -115,6 +124,11 @@ export function listingTemplate(data) {
   } else {
     avatar = "/assets/images/placeholder.jpeg";
   }
+
+  // do something like this?
+  /*   img.onerror = (event) => {
+    event.target.src = "../../../asset/img/placeholder_img.png";
+  }; */
   container.querySelector("#seller>img").src = avatar;
   container.querySelector("#seller>img").alt = avatar;
 
@@ -168,13 +182,13 @@ export function listingTemplate(data) {
         "align-items-center"
       );
       bid.innerHTML = `
-        <div id="bidder" class="col-6">
+        <div id="bidder" class="col-7">
           <img>
           <span id="bidderName"><a></a>
           </span>
         </div>
         <div class="col-2" id="bidAmount"></div>
-        <div class="col-4" id="bidDate"></div>
+        <div class="col-3" id="bidDate"></div>
       `;
       // bid.querySelector("#bidder>img").src = element.bidder.avatar; // should be another fetch to the seller?
       bid.querySelector("#bidderName>a").innerText = element.bidderName;
