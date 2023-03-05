@@ -19,6 +19,9 @@ export function listingsTemplate(data) {
 </div>`;
 
   // Title
+  if (data.title === "") {
+    data.title = "No Title";
+  }
   container.querySelector("h5").innerText = data.title;
 
   // Link
