@@ -13,7 +13,7 @@ export async function loginHandler(event) {
     const { accessToken, ...userInfo } = result;
     storage.save("accessToken", accessToken);
     storage.save("user", userInfo);
-    renderResponseMessage("You are logged in.", container, "success");
+    renderResponseMessage("Logging in...", container, "success");
     setTimeout(() => location.reload(), 1000);
   } catch (error) {
     renderResponseMessage(error.message, container, "danger");
