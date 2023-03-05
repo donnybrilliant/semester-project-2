@@ -1,6 +1,5 @@
 import { URL } from "../constants.mjs";
 import * as storage from "../../storage/index.mjs";
-import { renderResponseMessage } from "../../templates/response.mjs"; // template?
 
 //make one function for login and register as they share many similarities.
 export async function login(user) {
@@ -18,21 +17,14 @@ export async function login(user) {
 
   const result = await response.json();
 
-  //own function! responseHandler?
-  const container = document.querySelector("#loginResponse");
-
-  if (!response.ok) {
-    const error = result.errors[0].message;
-    return renderResponseMessage(error, container, "danger");
-    // error handle this message more?
+  if (response.ok) {
+    return result;
   }
 
-  const { accessToken, ...userInfo } = result;
-
-  storage.save("accessToken", accessToken);
-  storage.save("user", userInfo);
-
-  renderResponseMessage("You are logged in.", container, "success");
-
-  setTimeout(() => location.reload(), 1000); // should be to listings
+  if (!response.ok) {
+    const error = result.errors[0].message
+      ? result.errors[0].message
+      : "Log in error. Try again.";
+    throw new Error(error);
+  }
 }
