@@ -10,8 +10,16 @@ export async function create(data) {
     body: JSON.stringify(data),
   });
 
-  if (!response.ok) {
-    console.log(response); // render something here . responseHandler
+  const result = await response.json();
+
+  if (response.ok) {
+    return result;
   }
-  return response.json();
+
+  if (!response.ok) {
+    const error = result.errors[0].message
+      ? result.errors[0].message
+      : "There was an error creating the listing.";
+    throw new Error(error);
+  }
 }
