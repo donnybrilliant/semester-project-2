@@ -15,28 +15,40 @@
 
 <body>
 
-    <div class="container-fluid vh-100">
-        <nav class="navbar navbar-expand-sm">
+    <div class="container-fluid">
+
+        <nav class="navbar">
             <div class="container-fluid">
-                <a href="../index.html" class="navbar-brand">openAuction</a>
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#primary-nav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between" id="primary-nav">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                    <button type="button" class="btn btn-success" data-bs-target="#newListingModal"
-                        data-bs-toggle="modal" data-bs-dismiss="modal" title="Add new listing">
-                        <i class="bi bi-plus-circle"></i>
-                    </button>
+                <a class="navbar-brand" href="/index.html">openAuction</a>
+                <form class="d-none d-sm-block flex-fill me-3" role="search">
+                    <input class="form-control form-control-sm" type="search" placeholder="Search" aria-label="Search">
+                </form>
+                <div id="navControls">
                     <a href="#" data-bs-target="#loginModal" data-bs-toggle="modal" data-bs-dismiss="modal">Login</a>
+                </div>
+
+                <div class="navbar-collapse collapse" id="navigation">
+                    <ul class="navbar-nav">
+                        <li id="userInfo" class="nav-item my-4">
+                            Username: Credits:
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">My Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sign Out</a>
+                        </li>
+
+                    </ul>
+                    <form class="mt-4 d-block d-sm-none" role="search">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    </form>
                 </div>
             </div>
         </nav>
-
 
 
         <main>
