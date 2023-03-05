@@ -7,5 +7,6 @@ export function responseMessage(data, color) {
 
 export function renderResponseMessage(data, parent, color) {
   const response = responseMessage(data, color);
+  parent.innerHTML = "";
   parent.append(response);
 }
