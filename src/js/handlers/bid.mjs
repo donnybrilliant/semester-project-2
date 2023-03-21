@@ -5,9 +5,10 @@ export async function bidListener() {
       event.preventDefault();
       const form = event.target;
       const formData = new FormData(form);
-      const amount = Object.fromEntries(formData.entries());
-      console.log(amount);
-      //successmessage here or in create()?
+      const payload = Object.fromEntries(formData.entries());
+      payload.amount = parseInt(payload.amount);
+      bid(data.id, payload);
+      //successmessage here and reload page
     });
   }
 }
