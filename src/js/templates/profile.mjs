@@ -3,6 +3,9 @@ import { dateConverter, dateCountdown } from "../utils/date.mjs";
 
 export function profileInfoTemplate(data) {
   const container = document.querySelector("#profileInfo");
+
+  document.title += " - " + data.name;
+  // Check if owner and add edit button
   const user = load("user").name;
   if (user === data.name) {
     const editButton = `<button type="button" class="btn btn-outline-secondary mb-3" data-bs-toggle="modal"
