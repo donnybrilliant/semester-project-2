@@ -4,7 +4,6 @@ import { bid } from "../api/listings/bid.mjs";
 import { loggedIn } from "../utils/loggedIn.mjs";
 
 export function listingTemplate(data) {
-  console.log(data);
   const container = document.createElement("div");
   container.innerHTML = `
   <small id="dates" class="float-end"></small>
@@ -34,6 +33,9 @@ export function listingTemplate(data) {
 </div>
 </form>
   `;
+
+  container.classList.add("col-md-8", "mx-auto");
+
   //rename shit and make own function
   const form = container.querySelector("#placeBidForm");
   const placeBidAmount = form.querySelector("#placeBidAmount");
@@ -50,19 +52,6 @@ export function listingTemplate(data) {
     placeBidAmount.placeholder = "You must log in to bid";
     form.querySelector("button").setAttribute("disabled", true);
   }
-
-  if (form) {
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const form = event.target;
-      const formData = new FormData(form);
-      const payload = Object.fromEntries(formData.entries());
-      payload.amount = parseInt(payload.amount);
-      bid(data.id, payload);
-      //successmessage here and reload page
-    });
-  }
-  // disable bid if not logged in
 
   // Author
   if (loggedIn()) {
@@ -114,6 +103,8 @@ export function listingTemplate(data) {
     container.querySelector("#carousel>img").alt = data.title;
   }
 
+  // Title & Description
+  document.title += " - " + data.title;
   container.querySelector("h1").innerText = data.title;
   container.querySelector("#description").innerText = data.description;
 
