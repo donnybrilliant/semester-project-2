@@ -10,11 +10,35 @@
 
   $grid-breakpoints: (
   xs: 0,
+  smx: 375px,
   sm: 450px,
   md: 768px,
   lg: 992px,
   xl: 1200px,
   xxl: 1400px
 );
+/* 
+$primary: #00afb9;
+$secondary:  #fed9b7;
+$success: #069861;
+$info: #0dcaf0;
+$warning: #ffc107;
+$danger: #f07167;
+$light: #fdfcdc;
+$dark: #212529; */
 
 
+
+.col { 
+  transition: all .1s ease-in-out; 
+  }
+  
+  .col:hover { 
+  transform: scale(1.05); 
+  }
+
+/*   --red-pantone: #e63946ff;
+--honeydew: #f1faeeff;
+--non-photo-blue: #a8dadcff;
+--cerulean: #457b9dff;
+--berkeley-blue: #1d3557ff; */
