@@ -3,16 +3,17 @@ import { dateCountdown } from "../utils/date.mjs";
 export function listingsTemplate(data) {
   //better names?
   const container = document.createElement("div");
+  container.classList.add("col");
   container.innerHTML = `
   <div class="card">
-  <a class="link-dark text-decoration-none">
+  <a class="link-light text-decoration-none">
     <img class="card-img">
     <div class="card-img-overlay d-flex flex-column justify-content-between">
-      <h5 class="card-title"></h5>
+      <h5 class="card-title bg-primary bg-opacity-75 rounded p-1"></h5>
         <div class="d-flex justify-content-between">
-          <small id="bids"></small>
-          <small id="price"></small>
-          <small id="date" class="d-flex"></small>
+          <small id="bids" class="badge bg-primary bg-opacity-75"></small>
+          <small id="price" class="badge bg-primary bg-opacity-75"></small>
+          <small id="date" class="d-flex badge bg-primary bg-opacity-75"></small>
         </div>
     </div>
   </a>
@@ -54,11 +55,9 @@ export function listingsTemplate(data) {
   // should also check if resource exists/can be fetched
   // use this? https://codepen.io/kallil-belmonte/pen/KKKRoyx
 
-  let image = "";
+  let image = "/assets/images/placeholder.jpeg";
   if (data.media.length >= 1) {
     image = data.media[0];
-  } else {
-    image = "/assets/images/placeholder.jpeg";
   }
   container.querySelector("img").src = image;
   container.querySelector("img").alt = data.title;
@@ -67,7 +66,19 @@ export function listingsTemplate(data) {
 }
 
 export function renderListingTemplates(dataList, parent) {
+  document.title += " - " + "Listings";
   parent.innerHTML = ""; // should this be its own clear() function?
+  parent.classList.add(
+    "row",
+    "row-cols-1",
+    "row-cols-smx-2",
+    "row-cols-md-3",
+    "row-cols-lg-4",
+    "row-cols-xl-5",
+    "row-cols-xxl-6",
+    "align-items-stretch",
+    "g-4"
+  );
   dataList.forEach((element) => {
     const listing = listingsTemplate(element);
     parent.append(listing);
