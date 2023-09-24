@@ -44,3 +44,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+      - name: screenshots-ci-action
+        uses: flameddd/screenshots-ci-action@v2.0.0
+            
