@@ -1,9 +1,12 @@
 name: screenshots ci actions
-on:
-  push:
-    branches:
-    - master # Trigger flow when something pushed to master branch
 
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 jobs:
   screenshots:
     runs-on: ubuntu-latest
